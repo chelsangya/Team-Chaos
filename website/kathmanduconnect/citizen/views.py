@@ -5,7 +5,7 @@ from citizen.models import Safety
 from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 # from .models import Reports
 
 # @login_required
@@ -106,6 +106,7 @@ def safety(request):
             messages.error(request, message)
             print(e)
     return render(request, 'safetyandsecurity.html')
+
 
 def dashboard(request):
     return render(request, 'index.html')
