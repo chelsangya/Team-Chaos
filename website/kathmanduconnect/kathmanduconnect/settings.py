@@ -80,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'kathmanduconnect',   # Replace 'your_database_name' with your desired database name
         'USER': 'root',  # Replace 'your_mysql_username' with your MySQL username
-        'PASSWORD': 'root',  # Replace 'your_mysql_password' with your MySQL password
+        'PASSWORD': '',  # Replace 'your_mysql_password' with your MySQL password
         'HOST': 'localhost',            # Replace 'localhost' with your MySQL host (usually localhost)
         'PORT': '3306',                 # Replace '3306' with the MySQL port (usually 3306)
     }

@@ -1,10 +1,15 @@
+from kathmanduconnect.settings import BASE_DIR
+from django.http import JsonResponse
+from django.shortcuts import render, redirect
+from django.core.files.storage import default_storage
+from metropolition.models import Reports,Poll,UserPoll
+import os
 import numpy as np
 from keras.preprocessing import image
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.core.files.storage import default_storage
-from metropolition.models import Reports
-from PIL import Image
+from keras.models import load_model
+from django.conf import settings
+from django.http import JsonResponse
+import csv
 
 
 def submit_report(request):
@@ -16,12 +21,15 @@ def submit_report(request):
         
         photo_file = request.FILES.get('photo')
 
+        # Initialize photo with a default value
+        photo = ''
+
         if photo_file:
             # Get the file name from the uploaded file
             photo = photo_file.name
 
             # Save the file to the "upload" folder inside the "static" directory
-            file_path = f'static/upload/{photo_filename}'
+            file_path = f'static/upload/{photo}'
             with default_storage.open(file_path, 'wb+') as destination:
                 for chunk in photo_file.chunks():
                     destination.write(chunk)
@@ -30,8 +38,7 @@ def submit_report(request):
         category = 'pothole' if 'pothole' in request.POST else 'normal'
 
         # Get the currently logged-in user
-        #user = request.user
-        user = 1
+        user = request.user
 
         # Create the Reports object and save it to the database
         report = Reports(name=name, photo=photo, category=category, latitude=latitude, longitude=longitude, UseruID=user)
@@ -66,3 +73,57 @@ def submit_report(request):
     # If the request method is GET, simply render the form
     return render(request, 'report.html')
 
+
+
+def feedback_survey(request):
+    if request.method == 'POST':
+        user_id = request.user.id  # Assuming you are using Django's authentication and user is logged in
+        rating = request.POST.get('exampleForm')
+        feedback = request.POST.get('feedback')
+
+        # Check if the textarea data is valid using custom validation
+        is_valid = custom_algorithm_validates(feedback)
+
+        if is_valid:
+            # Assuming you have a specific Poll for feedback
+            poll = Poll.objects.get(title="Feedback request")
+
+            # Save the data to the UserPoll table
+            UserPoll.objects.create(UseruID_id=user_id, PollpID_id=poll.pID, answer=rating, description=feedback)
+
+            return JsonResponse({'success': True})
+        else:
+            # Return a JSON response with error indicating validation failure
+            return JsonResponse({'success': False, 'error': 'Validation failed'})
+
+    # Fetch the specific Poll for feedback
+    poll = Poll.objects.last()
+
+    # Pass the poll object to the template for rendering
+    return render(request, 'feedbackandsurvey.html', {'poll': poll})
+
+def custom_algorithm_validates(text):
+    path = os.path.join(BASE_DIR ,"HACKATHON/Team-Chaos/website/citizen/bad-words.csv")
+    bad_words = load_hate_words(path)
+    return detect_hate_words(text, bad_words)
+
+def load_hate_words(file_path):
+    hate_words = set()
+    with open(file_path, 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            for word in row:
+                word = word.strip().lower()
+                if word:
+                    hate_words.add(word)
+    return hate_words
+
+def detect_hate_words(sentence, hate_words):
+    preprocessed_sentence = sentence.lower().strip()
+    tokens = preprocessed_sentence.split()
+
+    for token in tokens:
+        if token in hate_words:
+            return True  # Hate word detected
+
+    return False  # No hate word detected

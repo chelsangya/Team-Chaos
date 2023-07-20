@@ -39,8 +39,6 @@ class Notices(models.Model):
 class Poll(models.Model):
     pID = models.AutoField(primary_key=True)
     title = models.CharField(max_length=50)
-    answer = models.CharField(max_length=50)
-    description = models.CharField(max_length=50)
 
 class Reports(models.Model):
     rID = models.AutoField(primary_key=True)
@@ -90,7 +88,9 @@ class UserNotices(models.Model):
 class UserPoll(models.Model):
     UseruID = models.ForeignKey(User, on_delete=models.CASCADE)
     PollpID = models.ForeignKey(Poll, on_delete=models.CASCADE)
-
+    answer = models.CharField(max_length=50)
+    description = models.CharField(max_length=500)
+    
 class UserVoting(models.Model):
     UseruID = models.ForeignKey(User, on_delete=models.CASCADE)
     VotingvID = models.IntegerField()
