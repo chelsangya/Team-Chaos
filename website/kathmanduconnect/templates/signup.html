@@ -21,7 +21,7 @@
                     <div class="card-body">
                         <h5 class="font-18 text-center">Register</h5>
     
-                        <form class="form-horizontal m-t-30" action="{{'/register/'}}" enctype="multipart/form-data">{% csrf_token %}
+                        <form class="form-horizontal m-t-30" method="POST" action="{{'/register/'}}" enctype="multipart/form-data">{% csrf_token %}
 
                             <div class="form-group">
                                 <div class="col-12">
