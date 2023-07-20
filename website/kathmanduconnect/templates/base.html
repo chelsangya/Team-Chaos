@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kathmandu Connect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+    <link href="{% static '\css\user\bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static '\css\user\metismenu.min.css' %}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.2.96/css/materialdesignicons.min.css" integrity="sha512-LX0YV/MWBEn2dwXCYgQHrpa9HJkwB+S+bnBpifSOTO1No27TqNMKYoAn6ff2FBh03THAzAiiCwQ+aPX+/Qt/Ow==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="{% static '\css\user\style.css' %}" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div class="header-bg">
+        <header id="topnav">
+            <div class="topbar-main">
+                <div class="container-fluid">
+                    <div>
+                        <a href="index.html" class="logo">
+                            <span class="logo-light">
+                                <i class="mdi mdi-camera-control"></i> kathmandu connect
+                            </span>
+                        </a>
+                    </div>
+                    <div class="menu-extras topbar-custom navbar p-0">
+                        <ul class="list-inline d-none d-lg-block mb-0">
+                            <li class="hide-phone app-search float-left">
+                                <form role="search" class="app-search">
+                                    <div class="form-group mb-0">
+                                        <input type="text" class="form-control" placeholder="Search.." />
+                                        <button type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+
+                        <ul class="navbar-right ml-auto list-inline float-right mb-0">
+                            <li class="dropdown notification-list list-inline-item d-none d-md-inline-block">
+                                <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown"
+                                    href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                    <img src="assets/images/flags/us_flag.jpg" class="mr-2" height="12" alt="" />
+                                    English <span class="mdi mdi-chevron-down"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated language-switch">
+                                    <a class="dropdown-item" href="#"><img src="assets/images/flags/french_flag.jpg"
+                                            alt="" height="16" /><span> Nepal </span></a>
+                                </div>
+                            </li>
+
+             
+
+                            <li class="dropdown notification-list list-inline-item">
+                                <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown"
+                                    href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                    <i class="mdi mdi-bell-outline noti-icon"></i>
+                                    <span class="badge badge-pill badge-danger noti-icon-badge">3</span>
+                                </a>
+                                <div
+                                    class="dropdown-menu dropdown-menu-right dropdown-menu-animated dropdown-menu-lg px-1">
+                                    <h6 class="dropdown-item-text">Notifications</h6>
+                                    <div class="slimscroll notification-item-list">
+                                       
+                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                            <div class="notify-icon bg-danger">
+                                                <i class="mdi mdi-message-text-outline"></i>
+                                            </div>
+                                            <p class="notify-details">
+                                                <b>New Message received</b><span class="text-muted">You have 87 unread
+                                                    messages</span>
+                                            </p>
+                                        </a>
+                                </div>
+                            </li>
+
+                            <li class="dropdown notification-list list-inline-item">
+                                <div class="dropdown notification-list nav-pro-img">
+                                    <a class="dropdown-toggle nav-link arrow-none nav-user" data-toggle="dropdown"
+                                        href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                        <img src="assets/images/users/user-4.jpg" alt="user" class="rounded-circle" />
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right profile-dropdown">
+                                        <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle"></i>
+                                            Profile</a>
+                                       
+                                        <a class="dropdown-item text-danger" href="#"><i
+                                                class="mdi mdi-power text-danger"></i> Logout</a>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="menu-item dropdown notification-list list-inline-item">
+                                <a class="navbar-toggle nav-link">
+                                    <div class="lines">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="navbar-custom">
+                <div class="container-fluid">
+                    <div id="navigation">
+                        <ul class="navigation-menu">
+                            <li class="has-submenu">
+                                <a href="index.html"><i class="icon-accelerator"></i> Dashboard</a>
+                            </li>
+
+                            <li class="has-submenu">
+                                <a href="#"><i class="icon-pencil-ruler"></i> Issues
+                                    <i class="mdi mdi-chevron-down mdi-drop"></i></a>
+                                <ul class="submenu megamenu">
+                                    <li>
+                                        <ul>
+                                            <li><a href="./report.html">Report</a></li>
+                                            <li><a href="./issuetracking.html">Issue Tracking</a></li>
+                                            <li><a href="./feedbackandsurvey.html">Feedback & Survey</a></li>
+                                            <li><a href="./safetyandsecurity.html">Safety and Security</a></li>
+                                        </ul>
+                                    </li>
+                                   
+                                </ul>
+                            </li>
+
+                            <li class="has-submenu">
+                                <a href="#"><i class="icon-life-buoy"></i> Connect
+                                    <i class="mdi mdi-chevron-down mdi-drop"></i></a>
+                                    <ul class="submenu megamenu">
+                                        <li>
+                                            <ul>
+                                                <li><a href="#">Event Creation</a></li>
+                                                <li><a href="#">Tourism Optimization</a></li>
+                                                <li><a href="#">Neighbourhood Forum</a></li>
+                                                <li><a href="#">Gamification & Reward</a></li>
+                                                <li><a href="#">Volunteer Opportunities</a></li>
+                                                <li><a href="#">Idea Creation & Voting</a></li>
+                                            </ul>
+                                        </li>
+                                       
+                                    </ul>
+                            </li>
+
+                            <li class="has-submenu">
+                                <a href="#"><i class="icon-paper-sheet"></i> Mobility
+                                    <i class="mdi mdi-chevron-down mdi-drop"></i></a>
+                                    <ul class="submenu megamenu">
+                                        <li>
+                                            <ul>
+                                                <li><a href="#">Public Transportation</a></li>
+                                                <li><a href="#">Waste Management</a></li>
+                                            </ul>
+                                        </li>
+                                       
+                                    </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="wrapper">
+        {% block content %}
+        <!-- Content of child templates will be rendered here -->
+        {% endblock %}
+    </div>
+
+    <!-- Load JavaScript files -->
+    <script src="{% static '\js\jquery.min.js' %}"></script>
+    <script src="{% static '\js\bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static '\js\jquery.slimscroll.js' %}"></script>
+    <script src="{% static '\js\waves.min.js' %}"></script>
+    <script src="{% static '\plugins\parsleyjs\parsley.min.js' %}"></script>
+    <script src="{% static '\js\app.js' %}"></script>
+    <!-- Your custom JavaScript files can be included here -->
+
+    <!-- Optional: Load additional JS files if needed -->
+
+</body>
+
+</html>
