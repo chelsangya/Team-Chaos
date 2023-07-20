@@ -2,8 +2,9 @@
 # from keras.preprocessing import image
 from django.shortcuts import render, redirect, HttpResponse
 from citizen.models import Safety
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
 # from django.contrib.auth.decorators import login_required
 # from .models import Reports
 
@@ -53,20 +54,41 @@ from django.contrib import messages
 #     # If the request method is GET, simply render the form
 #     return render(request, 'report.html')
 
+from django.contrib.auth import authenticate, login as auth_login
+from django.shortcuts import render, redirect
+
 def login(request):
-    return render(request, 'login.html')
+    if request.method == 'POST':
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        user = authenticate(request, username=email, password=password)
+
+        if user is not None:
+            auth_login(request, user) 
+            return redirect('/dashboard/')
+        else:
+            error_message = "Invalid email or password. Please try again."
+            return render(request, 'login.html', {'error_message': error_message})
+    else:
+        return render(request, 'login.html')
+
+
 
 def register(request):
     if request.method == 'POST':
         name = request.POST.get("name")
         email = request.POST.get("email")
         phone = request.POST.get("phone")
-        photo = request.FILES.get('photo')
         password = request.POST.get("password")
-        new_user = User.objects.create_user(name = name, email = email, phone = phone, password = password)
+        photo = request.FILES.get('photo')
+        username = name
+        CustomUser = get_user_model()
+        new_user = CustomUser.objects.create_user(username=username, email=email, password=password)
+        new_user.phone = phone
         new_user.photo = photo
         new_user.save()
-        return render(request, '/')
+
+        return redirect('/')
     return render(request, 'signup.html')
 
 def safety(request):
@@ -78,9 +100,12 @@ def safety(request):
             query.save()
             message = "Received your message!! We will be there for your aid ASAP."
             messages.success(request, message)
-            return redirect('/')
+            return redirect('/dashboard')
         except Exception as e:
             message = "Couldn't process your request!! Please try again later."
             messages.error(request, message)
             print(e)
     return render(request, 'safetyandsecurity.html')
+
+def dashboard(request):
+    return render(request, 'index.html')
