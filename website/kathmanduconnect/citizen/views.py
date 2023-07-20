@@ -103,7 +103,7 @@ def feedback_survey(request):
     return render(request, 'feedbackandsurvey.html', {'poll': poll})
 
 def custom_algorithm_validates(text):
-    path = os.path.join(BASE_DIR ,"HACKATHON/Team-Chaos/website/citizen/bad-words.csv")
+    path = "bad-words.csv"
     bad_words = load_hate_words(path)
     return detect_hate_words(text, bad_words)
 
