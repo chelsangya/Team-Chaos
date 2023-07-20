@@ -1,7 +1,8 @@
 from django.urls import path
-from citizen import views 
+
+
+from citizen.views import submit_report
 
 urlpatterns = [
-    path('', views.login, name='login'),
-    path('register', views.register, name='register')
+    path('report', submit_report, name='report'),
 ]
