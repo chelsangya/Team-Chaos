@@ -32,8 +32,10 @@ class Hotline(models.Model):
 class Notices(models.Model):
     nID = models.AutoField(primary_key=True)
     title = models.CharField(max_length=50)
-    description = models.CharField(max_length=50)
+    description = models.CharField(max_length=250)
     date = models.DateField()
+    volunteer = models.IntegerField(max_length=10)
+    
 
 class Poll(models.Model):
     pID = models.AutoField(primary_key=True)
@@ -44,7 +46,6 @@ class Poll(models.Model):
 class Reports(models.Model):
     rID = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
-    photo = models.CharField(max_length=50)
     category = models.CharField(max_length=50)
     status = models.CharField(max_length=50)
     latitude = models.CharField(max_length=20)

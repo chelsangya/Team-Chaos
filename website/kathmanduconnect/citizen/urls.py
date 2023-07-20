@@ -1,9 +1,12 @@
 from django.urls import path
-from citizen import views 
+from .views import login,register,safety,dashboard,submit_report
 
 urlpatterns = [
-    path('', views.login, name='login'),
-    path('register/', views.register, name='register'),
-    path('safety-and-security/', views.safety, name='safety')
+    path('', login, name='login'),
+    path('register/', register, name='register'),
+    path('safety-and-security/', safety, name='safety'),
+    path('dashboard/', dashboard, name = 'dashboard'),
+    path('report/',submit_report)
+    
 
 ]
