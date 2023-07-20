@@ -25,3 +25,9 @@ Kathmandu Connect aims to connect citizens with the metropolitan city and empowe
 **FrontEnd:** HTML, CSS, JavaScript,SCSS, BootStrap
 
 **BackEnd:** Django, MySQL
+
+
+## Originality
+
+The project, as the name suggests, is trageting Kathmandu Metropolitan City and its digital services. 
+It is using ML to train the data for precise and fast results. It only lets the citizens to join the site after verifying their citizenship status.
