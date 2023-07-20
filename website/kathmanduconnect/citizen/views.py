@@ -1,7 +1,8 @@
 # import numpy as np
 # from keras.preprocessing import image
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from citizen.models import Safety
+from django.contrib.auth.models import User
 from django.contrib import messages
 # from django.contrib.auth.decorators import login_required
 # from .models import Reports
@@ -56,6 +57,16 @@ def login(request):
     return render(request, 'login.html')
 
 def register(request):
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        phone = request.POST.get("phone")
+        photo = request.FILES.get('photo')
+        password = request.POST.get("password")
+        new_user = User.objects.create_user(name = name, email = email, phone = phone, password = password)
+        new_user.photo = photo
+        new_user.save()
+        return render(request, '/')
     return render(request, 'signup.html')
 
 def safety(request):

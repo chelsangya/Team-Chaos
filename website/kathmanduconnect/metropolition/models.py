@@ -7,8 +7,7 @@ class User(models.Model):
     phone = models.IntegerField()
     photo = models.CharField(max_length=50)
     citienship_no = models.IntegerField()
-    OTP = models.IntegerField()
-    role = models.CharField(max_length=255)
+    OTP = models.IntegerField(null=True)
 
 class Event(models.Model):
     eID = models.AutoField(primary_key=True)
