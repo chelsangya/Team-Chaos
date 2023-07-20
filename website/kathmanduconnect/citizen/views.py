@@ -2,22 +2,36 @@ import numpy as np
 from keras.preprocessing import image
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Reports
+from django.core.files.storage import default_storage
+from metropolition.models import Reports
+from PIL import Image
 
-@login_required
+
 def submit_report(request):
     if request.method == 'POST':
         # Get the data from the form
         name = request.POST.get('name', '')
-        photo = request.POST.get('photo', '')
         latitude = request.POST.get('latitude', '')
         longitude = request.POST.get('longitude', '')
+        
+        photo_file = request.FILES.get('photo')
+
+        if photo_file:
+            # Get the file name from the uploaded file
+            photo = photo_file.name
+
+            # Save the file to the "upload" folder inside the "static" directory
+            file_path = f'static/upload/{photo_filename}'
+            with default_storage.open(file_path, 'wb+') as destination:
+                for chunk in photo_file.chunks():
+                    destination.write(chunk)
 
         # Determine the category based on the submitted form
         category = 'pothole' if 'pothole' in request.POST else 'normal'
 
         # Get the currently logged-in user
-        user = request.user
+        #user = request.user
+        user = 1
 
         # Create the Reports object and save it to the database
         report = Reports(name=name, photo=photo, category=category, latitude=latitude, longitude=longitude, UseruID=user)
@@ -25,8 +39,10 @@ def submit_report(request):
         # Set the status based on prediction (only for pothole category)
         if category == 'pothole':
             # Load the CNN model and make a prediction
-            loaded_model = load_model('path/to/your/model')  # Replace with the actual path to your CNN model
-            test_image = image.load_img('D:/HACKATHON/Team-Chaos/models/pothole-dataset/try3.jpg', target_size=(64, 64))
+            loaded_model = load_model('pothole_classifier_model.h5')  # Replace with the actual path to your CNN model
+            # test_image = image.load_img('D:/HACKATHON/Team-Chaos/models/pothole-dataset/try3.jpg', target_size=(64, 64))
+            image_path = os.path.join(settings.BASE_DIR, file_path)
+            test_image = image.load_img(image_path, target_size=(64, 64))
             test_image = image.img_to_array(test_image)
             test_image = np.expand_dims(test_image, axis=0)
             result = loaded_model.predict(test_image)
