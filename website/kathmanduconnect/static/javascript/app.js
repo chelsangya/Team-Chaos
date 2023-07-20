@@ -1,11 +1,3 @@
-/*
- Template Name: Stexo - Responsive Bootstrap 4 Admin Dashboard
- Author: Themesdesign
- Website: www.themesdesign.in
- File: Main js
- */
-
-
 !function($) {
     "use strict";
 
@@ -58,43 +50,6 @@
     MainApp.prototype.initComponents = function () {
         $('[data-toggle="tooltip"]').tooltip();
         $('[data-toggle="popover"]').popover();
-    },
-
-    //full screen
-    MainApp.prototype.initFullScreen = function () {
-        var $this = this;
-        $this.$btnFullScreen.on("click", function (e) {
-            e.preventDefault();
-
-            if (!document.fullscreenElement && /* alternative standard method */ !document.mozFullScreenElement && !document.webkitFullscreenElement) {  // current working methods
-                if (document.documentElement.requestFullscreen) {
-                    document.documentElement.requestFullscreen();
-                } else if (document.documentElement.mozRequestFullScreen) {
-                    document.documentElement.mozRequestFullScreen();
-                } else if (document.documentElement.webkitRequestFullscreen) {
-                    document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-                }
-            } else {
-                if (document.cancelFullScreen) {
-                    document.cancelFullScreen();
-                } else if (document.mozCancelFullScreen) {
-                    document.mozCancelFullScreen();
-                } else if (document.webkitCancelFullScreen) {
-                    document.webkitCancelFullScreen();
-                }
-            }
-        });
-    },
-
-
-
-    MainApp.prototype.init = function () {
-        this.initSlimscroll();
-        this.initNavbar();
-        this.initActiveMenu();
-        this.initComponents();
-        this.initFullScreen();
-        Waves.init();
     },
 
     //init
